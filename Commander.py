@@ -6,9 +6,11 @@ import pathlib
 path = str(pathlib.Path(__file__).parent.resolve())
 configjson = {}
 currentproject = ''
+proname = ''
 
-def compilebydir(dir):
-    print(dir)
+def compilebydir(prodir):
+    os.system(f'rm -rf {prodir}/tmp/')
+    os.system(f'cp -r {prodir}/src/ {prodir}/tmp/ -f')
 
 def getConfig():
     configfilepath = str(path)+'/config/config.json'
@@ -22,14 +24,15 @@ def getConfig():
         print('json syntax invalvid...')
         print('please fix the config.')
         exit()
-    print(configfilepath)
     
 def main():
+    os.system(f'cd {path}')
     getConfig()
     for (root, dirs, file) in os.walk(path+'/projects'):
         if(root==str(path)+'/projects'):
             for dir in dirs:
-                compilebydir(dir)
+                proname = dir
+                compilebydir(path+'/projects/'+dir)
 
 if __name__=='__main__':
     main()

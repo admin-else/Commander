@@ -1,0 +1,4 @@
+@mc:tick
+def tick
+    spawn WELCOME_TEXT SPAWN_POS
+    kill @
